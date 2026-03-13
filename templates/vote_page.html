@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="cs">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Beer-o-meter: Voting</title>
+    <link rel="stylesheet" href="/static/style.css">
+</head>
+<body>
+    <div class="container">
+        <div class="buttons">
+            <button onclick="vote('0. patro')">0. patro</button>
+            <button onclick="vote('1. patro')">1. patro</button>
+            <button onclick="vote('2. patro')">2. patro</button>
+            <button onclick="vote('3. patro')">3. patro</button>
+            <button onclick="vote('4. patro')">4. patro</button>
+            <button onclick="vote('5. patro')">5. patro</button>
+        </div>
+    </div>
+    <script>
+        async function vote(option) {
+            const btn = [...document.querySelectorAll('button')]
+                .find(b => b.textContent === option);
+
+            if (btn) {
+                btn.classList.add('clicked'); // přidá zelený efekt
+                setTimeout(() => btn.classList.remove('clicked'), 600); // po 0,6 s vrátí zpět
+            }
+
+            await fetch('/vote', {
+                method: 'POST',
+                headers: {'Content-Type': 'application/json'},
+                body: JSON.stringify({ option })
+            });
+        }
+    </script>
+</body>
+</html>
