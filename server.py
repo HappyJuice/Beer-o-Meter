@@ -5,6 +5,13 @@ import os
 
 app = Flask(__name__)
 DATA_FILE = 'votes.json'
+ALLOWED_IPS = {'127.0.0.1', '172.16.213.139'}
+
+
+@app.before_request
+def allow_selected_ips():
+    if request.method == 'POST' and request.remote_addr not in ALLOWED_IPS:
+        return jsonify(error='IP address is not allowed'), 403
 
 
 # Načti hlasy ze souboru
