@@ -10,7 +10,7 @@ DATA_FILE = 'votes.json'
 # Načti hlasy ze souboru
 def load_votes():
     if not os.path.exists(DATA_FILE):
-        return {"0. patro": 0, "1. patro": 0, "2. patro": 0, "3. patro": 0, "4. patro": 0, "5. patro": 0}
+        return {"0. patro": 0, "1. patro": 0, "2. patro": 0, "3. patro": 0, "4. patro": 0, "5. patro": 0, "Imposters": 0}
     with open(DATA_FILE, 'r', encoding='utf-8') as f:
         return json.load(f)
 
